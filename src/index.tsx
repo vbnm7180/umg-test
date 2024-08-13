@@ -40,7 +40,10 @@ root.render(
             optionSelectedBg: "rgba(0,0,0,0.04)",
           },
           "Input": {
-            controlHeight: 40
+            controlHeight: 40,
+          },
+          "Form": {
+            labelColor: "#636C7D"
           },
         },
       }}

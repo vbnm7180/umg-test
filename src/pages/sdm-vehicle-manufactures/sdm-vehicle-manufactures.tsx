@@ -1,5 +1,4 @@
-import { Button, Card, Flex, Input, Select, Table, Typography } from "antd";
-import Search from "antd/es/input/Search";
+import { Flex, Select, Table, Typography } from "antd";
 import React from "react";
 import styled from "styled-components";
 import {
@@ -7,7 +6,11 @@ import {
   vehicleManufacturesColumns,
   vehicleManufacturesData,
 } from "./sdm-vehicle-manufactures.model";
-import { DownOutlined, PlusOutlined } from "@ant-design/icons";
+import { DownOutlined } from "@ant-design/icons";
+import { AddButton } from "../../components/button-add/button-add";
+import { Card } from "../../components/card/card";
+import { Search } from "../../components/search/search";
+import { useNavigate } from "react-router";
 
 const PageBackground = styled.div`
   background-color: #e6e6e6;
@@ -18,16 +21,6 @@ const PageBackground = styled.div`
 const PageWrapper = styled(Flex)`
   height: 100vh;
 `;
-
-const PageCard = styled(Card)`
-  padding: 24px 32px;
-  max-width: 1080px;
-  margin: 0 auto;
-`;
-
-// const SearchRow = styled(Flex)`
-//   padding: 16px 0;
-// `;
 
 const PageTitle = styled(Typography.Title)`
   font-size: 32px;
@@ -47,14 +40,6 @@ const SearchSelect = styled(Select)`
   width: 220px;
 `;
 
-const SearchField = styled(Input.Search)`
-  width: 320px;
-`;
-
-const AddVehicleButton = styled(Button)`
-  height: 40px;
-`;
-
 const VehicleTable = styled(Table)`
   border-top: 1px solid #f0f0f0;
 `;
@@ -63,20 +48,12 @@ const DownIconOrange = styled(DownOutlined)`
   color: #dd6a35;
 `;
 
-// const PageHeader = styled(Text)`
-//   border-radius: 8px;
-//   background-color: white;
-//   padding: 24px 32px;
-// `;
-
 export const SdmVehicleManufactures = (): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <PageWrapper vertical>
       <PageBackground>
-        {/* <Card>
-      <p className="ant-card-meta-description">Description</p>
-      </Card> */}
-        <PageCard>
+        <Card>
           <PageTitle>Транспортные средства</PageTitle>
           <PageSearchSection>
             <Flex gap={16}>
@@ -94,15 +71,14 @@ export const SdmVehicleManufactures = (): JSX.Element => {
                 onChange={() => {}}
                 options={selectorOptions}
               />
-              <SearchField
-                enterButton
-                placeholder="Введите поисковый запрос"
-                onSearch={() => {}}
-              />
+              <Search onSearch={() => {}} />
             </Flex>
-            <AddVehicleButton type="primary" icon={<PlusOutlined />}>
-              Добавить ТС
-            </AddVehicleButton>
+            <AddButton
+              entityName="TC"
+              onClick={() => {
+                navigate("/create-vehicle");
+              }}
+            />
           </PageSearchSection>
           <VehicleTable
             pagination={false}
@@ -111,7 +87,7 @@ export const SdmVehicleManufactures = (): JSX.Element => {
             columns={vehicleManufacturesColumns}
             dataSource={vehicleManufacturesData}
           />
-        </PageCard>
+        </Card>
       </PageBackground>
     </PageWrapper>
   );
