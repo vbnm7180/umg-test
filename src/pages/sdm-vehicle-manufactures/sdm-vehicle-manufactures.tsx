@@ -83,7 +83,7 @@ export const SdmVehicleManufactures = (): JSX.Element => {
           <VehicleTable
             pagination={false}
             virtual
-            scroll={{ y: 812 }}
+            scroll={{ y: 400 }}
             columns={vehicleManufacturesColumns}
             dataSource={vehicleManufacturesData}
           />
